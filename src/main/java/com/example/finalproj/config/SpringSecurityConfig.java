@@ -16,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.servlet.http.HttpSession;
 import java.util.concurrent.ExecutorService;
@@ -73,6 +74,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .authorizeRequests()
                 .antMatchers("/user/admin").hasRole("ADMIN")
+                .antMatchers("/signup").permitAll()
                 .antMatchers("/", "/resources/", "/css/", "/js/", "/images/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -84,7 +86,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll()
-                .logoutSuccessUrl("/");
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+//                .invalidateHttpSession(true)
+//                .clearAuthentication(true)
+//                .deleteCookies("JSESSIONID")
+                .logoutSuccessUrl("/").permitAll();
     }
 }

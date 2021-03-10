@@ -140,7 +140,7 @@ public class QuestionService {
         for (Answer a: answers) {
             a.setAnswerText(newAnswers.get(i).getAnswerText());
             answerRepository.save(a);
-            System.out.println(newAnswers.get(i).getAnswerText());
+//            System.out.println(newAnswers.get(i).getAnswerText());
             i++;
         }
 

@@ -1,10 +1,7 @@
 package com.example.finalproj.controller;
 
 import com.example.finalproj.repository.RoleRepository;
-import com.example.finalproj.repository.dto.Account;
-import com.example.finalproj.repository.dto.Answer;
-import com.example.finalproj.repository.dto.Question;
-import com.example.finalproj.repository.dto.Vote;
+import com.example.finalproj.repository.dto.*;
 import com.example.finalproj.service.AccountDetailsService;
 import com.example.finalproj.service.QuestionService;
 import com.example.finalproj.service.RoleService;
@@ -17,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
 public class HomeController {
     private RoleService roleService;
     private AccountDetailsService accountDetailsService;
@@ -39,14 +35,15 @@ public class HomeController {
 
     @GetMapping("/signup")
     public String signup(Model model){
+        model.addAttribute("user", new Account());
         return "signup";
     }
 
     @PostMapping("/signup")
     public String reg(@ModelAttribute("user") Account account) {
-        account.setRole(roleService.getRole(account.getRole().getRoleId()));
+        account.setRole(roleService.getRole(Long.valueOf(2)));
         userService.registerUser(account);
-        return "redirect:/login";
+        return "redirect:/login?success";
     }
 
     @GetMapping("/home")
@@ -63,7 +60,7 @@ public class HomeController {
     @PostMapping("/home")
     public String answer(@ModelAttribute("chosenAns") Answer ans){
         questionService.setVote(ans.getAnswerId(),accountDetailsService.getAccount());
-        return "redirect:/";
+        return "redirect:/home";
     }
 
 }

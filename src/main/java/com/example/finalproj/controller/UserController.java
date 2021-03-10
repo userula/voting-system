@@ -49,7 +49,7 @@ public class UserController {
     @PostMapping("/{id}/edit")
     public String updateUser(@ModelAttribute("user") Account user, @PathVariable(value = "id") Long id){
         userService.updateUser(id, user);
-        return "redirect:/";
+        return "redirect:/home";
     }
 
     @GetMapping("/admin")
@@ -69,7 +69,7 @@ public class UserController {
     public String addUser(@ModelAttribute("user") Account account) {
         account.setRole(roleService.getRole(account.getRole().getRoleId()));
         userService.registerUser(account);
-        return "redirect:/";
+        return "redirect:/home";
     }
     @GetMapping("/addQuestion")
     public String toAddQuestion(Model model){
@@ -86,17 +86,17 @@ public class UserController {
     public String addQuestion(@ModelAttribute("question") Question question) {
         questionService.registerQuestion(question);
         questionService.registerAnswers(question);
-        return "redirect:/";
+        return "redirect:/home";
     }
     @GetMapping("/deleteQuestion/{id}")
     public String deleteQuestion(@PathVariable(value = "id")Long id, Model model){
         questionService.deleteQuestion(id);
-        return "redirect:/";
+        return "redirect:/home";
     }
     @GetMapping("/deleteUser/{id}")
     public String deleteUser(@PathVariable(value = "id")Long id){
         userService.deleteUser(id);
-        return "redirect:/";
+        return "redirect:/home";
     }
     @GetMapping("/question/{id}")
     public String toQuestion(@PathVariable(value = "id")Long id, Model model){
@@ -118,6 +118,6 @@ public class UserController {
     public String updateQ(@PathVariable(value = "id")Long id, @ModelAttribute("question") Question question){
         questionService.updateQuestion(id, question);
         questionService.updateAnswers(id, question);
-        return "redirect:/";
+        return "redirect:/home";
     }
 }

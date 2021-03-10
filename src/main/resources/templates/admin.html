@@ -25,6 +25,10 @@
             <a th:href="'/user/deleteQuestion/' + ${q.questionId}">Delete</a>
         </div>
         <a class="btn btn-primary" href="/user/addQuestion">Add Question</a>
+    </div>
+</div>
+<div class="list">
+    <div class="container">
         <h3>List of Users</h3>
         <div th:each="u : ${users}" class="alert alert-info mt-0">
             <a th:href="'/user/' + ${u.userId}"><h4 th:text="${u.username}"/></a>
