@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <style>
+        .list{
+            margin: 20px;
+        }
+        .list .container{
+            box-shadow: 0 0 20px;
+            padding: 50px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="list">
+    <div class="container mt-3">
+        <h3>List of Questions</h3>
+        <div th:each="q : ${question}" class="alert alert-info mt-0">
+            <a th:href="'/user/question/' + ${q.questionId}"><h4 th:text="${q.questionText}"/></a>
+            <a th:href="'/user/deleteQuestion/' + ${q.questionId}">Delete</a>
+        </div>
+        <a class="btn btn-primary" href="/user/addQuestion">Add Question</a>
+        <h3>List of Users</h3>
+        <div th:each="u : ${users}" class="alert alert-info mt-0">
+            <a th:href="'/user/' + ${u.userId}"><h4 th:text="${u.username}"/></a>
+            <a th:href="'/user/deleteUser/' + ${u.userId}">Delete</a>
+        </div>
+        <a class="btn btn-primary" href="/user/addUser">Add User</a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Book</title>
+    <style>
+        .list{
+            margin: 20px;
+        }
+        .list .container{
+            box-shadow: 0 0 20px;
+            padding: 50px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="list">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <h1>Update Question</h1>
+            </div>
+            <div class="col-md-6">
+                <form class="form" method="post" th:object="${question}">
+                    <div class="form-group">
+                        <label for="ques">Question</label>
+                        <input type="text" class="form-control" placeholder="Question..." id="ques" th:field="*{questionText}">
+                    </div>
+                    <div class="form-group">
+                        <label for="ans1">Answer 1</label>
+                        <input type="text" class="form-control" id="ans1" placeholder="Answer" th:field="*{answerOptions[0].answerText}">
+                    </div>
+                    <div class="form-group">
+                        <label for="ans2">Answer 2</label>
+                        <input type="text" class="form-control" id="ans2" placeholder="Answer" th:field="*{answerOptions[1].answerText}">
+                    </div>
+                    <div class="form-group">
+                        <label for="ans3">Answer 3</label>
+                        <input type="text" class="form-control" id="ans3" placeholder="Answer" th:field="*{answerOptions[2].answerText}">
+                    </div>
+                    <!--            <input type="text" class="input" placeholder="Question text" th:field="*{questionText}">-->
+                    <!--            <input type="text" class="input" placeholder="Answer 1" th:field="*{answerOptions[0].answerText}">-->
+                    <!--            <input type="text" class="input" placeholder="Answer 2" th:field="*{answerOptions[1].answerText}">-->
+                    <!--            <input type="text" class="input" placeholder="Answer 3" th:field="*{answerOptions[2].answerText}">-->
+                    <input type="submit" class="submit btn btn-warning" value="Update question">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

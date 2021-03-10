@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <style>
+        .list{
+            margin: 20px;
+        }
+        .list .container{
+            box-shadow: 0 0 20px;
+            padding: 50px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-body border-bottom shadow-sm">
+        <p class="h5 my-0 me-md-auto fw-normal">Dashboard</p>
+        <nav class="my-2 my-md-0 me-md-3">
+            <a class="p-2 text-dark" href="/">Home</a>
+            <a class="p-2 text-dark" th:href="'/user/' + ${user.userId}">Profile</a>
+            <a class="p-2 text-dark" th:if="${user.role.roleId == 1}" href="/user/admin">Admin</a>
+        </nav>
+        <a class="btn btn-outline-primary" href="/logout">Sign out</a>
+    </header>
+
+<div class="list">
+    <div class="container mt-3">
+        <h3>List of questions</h3>
+        <div th:each="q : ${question}" class="alert alert-info mt-0">
+            <form method="post" th:object="${chosenAns}">
+                <h4 th:text="${q.questionText}" />
+                <div th:each="a : ${answers}" th:if="${a.question.questionId == q.questionId}">
+                    <input type="radio" th:id="${a.answerId}" th:name="${q.questionId}" th:value="${a.answerId}" th:field="*{answerId}">
+                    <label th:for="${a.answerId}" th:text="${a.answerText}"/>
+                </div>
+                <input type="submit" value="Answer">
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="list">
+    <div class="container mt-3">
+        <h3>List of statistics</h3>
+        <div th:each="q : ${question2}" class="alert alert-info mt-0">
+            <form method="post" th:object="${chosenAns}">
+                <h4 th:text="${q.questionText}" />
+                <h4 th:text="'Total answers: '+${q.statistic}"/>
+                <div th:each="a : ${answers2}" th:if="${a.question.questionId == q.questionId}">
+                    <p th:id="${a.answerId}" th:text="${a.answerText}+' - '+${a.statistic}+'%'"></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

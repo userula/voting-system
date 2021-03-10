@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Message page</title>
+    <style>
+        .list{
+            margin: 20px;
+        }
+        .list .container{
+            box-shadow: 0 0 20px;
+            padding: 50px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+<div class="list">
+    <div class="container mt-3">
+        <h3>Message</h3>
+        <div class="alert alert-info mt-0">
+            <h4 th:text="${message}"/>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

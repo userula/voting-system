@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Book</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="list">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <h1>Edit Student</h1>
+            </div>
+            <div class="col-md-6">
+                <form class="form" th:method="POST" th:object="${user}">
+                    <div class="form-group">
+                        <label for="fname">First Name</label>
+                        <input type="text" class="input form-control" id="fname" placeholder="First Name" th:field="*{firstName}">
+                    </div>
+                    <div class="form-group">
+                        <label for="lname">Last Name</label>
+                        <input type="text" class="input form-control" id="lname" placeholder="Last Name" th:field="*{lastName}">
+                    </div>
+                    <div class="form-group">
+                        <label for="groupn">Group Name</label>
+                        <input type="text" class="input form-control" id="groupn" placeholder="Group Name" th:field="*{groupName}">
+                    </div>
+                    <div class="form-group">
+                        <label for="agee">Age</label>
+                        <input type="text" class="input form-control" id="agee" placeholder="Age" th:field="*{age}">
+                    </div>
+                    <div class="form-group">
+                        <label for="interest">Interest</label>
+                        <input type="text" class="input form-control" id="interest" placeholder="Interest" th:field="*{interest}">
+                    </div>
+<!--                    <input type="text" class="input" placeholder="firstname" th:field="*{firstName}">-->
+<!--                    <input type="text" class="input" placeholder="lastname" th:field="*{lastName}">-->
+<!--                    <input type="text" class="input" placeholder="groupname" th:field="*{groupName}">-->
+<!--                    <input type="text" class="input" placeholder="age" th:field="*{age}">-->
+<!--                    <input type="text" class="input" placeholder="interest" th:field="*{interest}">-->
+
+                    <div th:if="${currentUser.role.roleId == 1}" th:each="role : ${roles}">
+                        <div class="form-group">
+                            <label th:for="${role.roleId}" th:text="${role.roleName}"/>
+                            <input type="radio" class="form-control" th:id="${role.roleId}" th:value="${role.roleId}" th:name="${user.role}" th:field="*{role.roleId}">
+                        </div>
+                    </div>
+
+                    <input type="submit" class="submit btn btn-success" value="Update">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+    <style>
+        .list{
+            margin: 20px;
+        }
+        .list .container{
+            box-shadow: 0 0 20px;
+            padding: 50px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+
+<div class="list">
+    <div class="container mt-3">
+        <div th:object="${user}" class="alert alert-info mt-0">
+            <h4 th:text="${user.username}"></h4>
+            <p><b>Name: </b><span th:text="${user.firstName}"></span></p>
+            <p><b>Surname: </b><span th:text="${user.lastName}"></span></p>
+            <p><b>Age: </b><span th:text="${user.age}"></span></p>
+            <p><b>Interest: </b><span th:text="${user.interest}"></span></p>
+            <p><b>Group: </b><span th:text="${user.groupName}"></span></p>
+            <p th:if="${currentUser.role.roleId == 1}"><b>Role: </b><span th:text="${user.role.roleName}"></span></p>
+            <a th:href="'/user/' + ${user.userId} + '/edit'" class="btn btn-warning">Edit</a>
+        </div>
+
+        <h3>Votes history</h3>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Question</th>
+                <th scope="col">Answer</th>
+                <th scope="col">Date</th>
+            </tr>
+            </thead>
+            <div th:each="vote : ${votes}">
+                <tr>
+                    <th th:text="${vote.answer.question.questionText}" scope="row"></th>
+                    <th th:text="${vote.answer.answerText}" scope="row"></th>
+                    <th th:text="${vote.date}" scope="row"></th>
+                </tr>
+            </div>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

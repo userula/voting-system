@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book</title>
+    <style>
+        .list{
+            margin: 20px;
+        }
+        .list .container{
+            box-shadow: 0 0 20px;
+            padding: 50px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="list">
+    <div class="container mt-3">
+        <div th:object="${question}" class="alert alert-info mt-0">
+            <h4 th:text="${question.questionText}" />
+            <div th:each="a : ${answers}" th:if="${a.question.questionId == question.questionId}">
+                <input type="radio" th:id="${a.answerId}" th:name="${question.questionId}" th:value="${a.answerId}" th:field="*{questionId}">
+                <label th:for="${a.answerId}" th:text="${a.answerText}"/>
+            </div>
+            <a th:href="'/user/updateQuestion/' + ${question.questionId}" class="btn btn-warning">Update question</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
